@@ -49,6 +49,7 @@ Keeps older mods working after STS2 CardPlay / Damage / Hook signature changes:
 - **Boss Mechanics Plus / Illaoi** — removes obsolete `SavedPropertiesTypeCache` registration calls that fail during startup on STS2 v0.109.
 - **PengoTarot** — implements the v0.109 `PlayerChoiceContext` requirements and retargets its Wheel of Fortune damage call.
 - **No Duplicate Characters** — retargets seed hashing / `Rng` construction to the v0.109 `UInt64` APIs so starting a run no longer hard-crashes.
+- **SpireHeart (Heart of the Spire)** — retargets `RunRngSet.get_Seed` from `UInt32` → `UInt64` (with truncate) so `BeforeCombatStart` no longer aborts combat setup with empty hand / 0 energy.
 - **Balls2** — DragonBall potion crash + combat-count guard; skips multiplayer-unsafe card-select UIs on DragonBall / Mercury / Mars / CrystalBall / BouncyBall / Marble.
 - **Cultist Simulator Relic** — restores Radiant Substance's intended **Illumination** enchantment; fixes **Radiance** itself by running its energy refund through the enchanted card's direct `OnPlay` hook; retargets `CreateDupe()` → `CreateDupe(Player)` for Rebound Sun Book on STS2 v0.109.
 - **YukiMod** — retargets `CreateDupe()` → `CreateDupe(Player)` for card replay on STS2 v0.109.
@@ -115,6 +116,7 @@ All credit for the mods themselves belongs to their authors. TarnishedCompat onl
 | BloodMaze | GanbaruKing |
 | Balls2 | dandylion1740 |
 | No Duplicate Characters | gandalf196 |
+| Heart of the Spire (SpireHeart) | Boninall |
 | UncappedSpire | Pr0ject |
 | PengoTarot | Pengo |
 
