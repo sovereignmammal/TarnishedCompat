@@ -54,7 +54,7 @@ TarnishedCompat does **not** replace the mods. It:
 1. Backs up originals where needed.
 2. Retargets call sites / Harmony signatures onto the current game APIs.
 3. Applies a few narrowly scoped behavior guards where the upstream mod path is known-broken in co-op or on unknown acts.
-4. Publishes a self-updating zip so friends stay on the same patched set.
+4. Publishes a self-updating zip so users stay on the same patched set.
 
 When a fix changes gameplay (example: Balls2 multiplayer card-select skips, Sephiroth rest/merchant unhide, Radiant → Radiance), it is intentional compatibility triage: prefer a working co-op/singleplayer experience over preserving a broken call path.
 
