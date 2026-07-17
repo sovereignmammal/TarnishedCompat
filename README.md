@@ -48,6 +48,7 @@ Keeps older mods working after STS2 CardPlay / Damage / Hook signature changes:
 - **UncappedSpire** — removes obsolete `SavedPropertiesTypeCache.InjectTypeIntoCache` calls that hard-crash ModelDb init on STS2 v0.109.
 - **Boss Mechanics Plus / Illaoi** — removes obsolete `SavedPropertiesTypeCache` registration calls that fail during startup on STS2 v0.109.
 - **PengoTarot** — implements the v0.109 `PlayerChoiceContext` requirements and retargets its Wheel of Fortune damage call.
+- **No Duplicate Characters** — retargets seed hashing / `Rng` construction to the v0.109 `UInt64` APIs so starting a run no longer hard-crashes.
 - **Balls2** — DragonBall potion crash + combat-count guard; skips multiplayer-unsafe card-select UIs on DragonBall / Mercury / Mars / CrystalBall / BouncyBall / Marble.
 - **Cultist Simulator Relic** — restores Radiant Substance's intended **Illumination** enchantment; fixes **Radiance** itself by running its energy refund through the enchanted card's direct `OnPlay` hook; retargets `CreateDupe()` → `CreateDupe(Player)` for Rebound Sun Book on STS2 v0.109.
 - **YukiMod** — retargets `CreateDupe()` → `CreateDupe(Player)` for card replay on STS2 v0.109.
@@ -113,6 +114,9 @@ All credit for the mods themselves belongs to their authors. TarnishedCompat onl
 | marisamod | Flynn, Hell, Hohner_257, Kishin, Samsara |
 | BloodMaze | GanbaruKing |
 | Balls2 | dandylion1740 |
+| No Duplicate Characters | gandalf196 |
+| UncappedSpire | Pr0ject |
+| PengoTarot | Pengo |
 
 **Dependencies (unpatched, used by several mods above):**
 - BaseLib — Alchyr
