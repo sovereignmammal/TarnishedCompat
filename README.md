@@ -59,7 +59,7 @@ Keeps older mods working after STS2 CardPlay / Damage / Hook signature changes:
 - **The Unknown** — stubs obsolete `WithCustomPool` so Codex pool calls don’t hang.
 
 ### Localization / PCK polish
-English display names / character-select text for Cultist, Reimu, WeaponMaster (GrandMaster at Arms), Yuki, LittleWizard, Wanderer, Tarnished, Saber, and Wylder Act 4 labels. Wylder's Act 4 boss (**Equilibrious Beast**) gets full English for its name, choice cards, moves, summons, and fight buffs/debuffs — including Hatred tooltips that were hardcoded Chinese in the DLL. Optional Wylder background replacement asset included.
+English display names / character-select text for Cultist, Reimu, WeaponMaster (GrandMaster at Arms), Yuki, LittleWizard, Wanderer, Tarnished, Saber, and Hextech Runes, plus Wylder Act 4 labels. Hextech Runes' manifest name is translated so its relic attribution and WhatMod label no longer show `海克斯符文`. Wylder's Act 4 boss (**Equilibrious Beast**) gets full English for its name, choice cards, moves, summons, and fight buffs/debuffs — including Hatred tooltips that were hardcoded Chinese in the DLL. Optional Wylder background replacement asset included.
 
 ### Restoring localization after a Steam update
 Steam Workshop updates and Steam's **Verify integrity of game files** can restore original game/mod files and overwrite TarnishedCompat's DLL or PCK localization patches. To restore them:
@@ -117,6 +117,7 @@ All credit for the mods themselves belongs to their authors. TarnishedCompat onl
 | Balls2 | dandylion1740 |
 | No Duplicate Characters | gandalf196 |
 | Heart of the Spire (SpireHeart) | Boninall |
+| Hextech Runes | Natsuki |
 | UncappedSpire | Pr0ject |
 | PengoTarot | Pengo |
 
