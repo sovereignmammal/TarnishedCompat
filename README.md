@@ -2,7 +2,7 @@
 
 STS2 compatibility patcher with auto-updates.
 
-Download the latest `TarnishedCompat-patcher.zip` from [Releases](https://github.com/sovereignmammal/TarnishedCompat/releases), extract, close the game, then run `PatchAll.bat`. Later updates: `UpdatePatcher.bat`.
+Friends: download the latest `TarnishedCompat-patcher.zip` from [Releases](https://github.com/sovereignmammal/TarnishedCompat/releases), extract, close the game, then run `PatchAll.bat`. Later updates: `UpdatePatcher.bat`.
 
 ---
 
@@ -13,6 +13,7 @@ TarnishedCompat keeps a curated set of Workshop mods playable on current STS2 / 
 ### Game (`sts2.dll`)
 - **Tezcatara’s Ember** — enchanted cards (including modded ones) correctly become free.
 - **MegaLabel theme-font assert** — card library / compendium no longer hard-crashes on missing theme fonts.
+- **Steam branch-support noise** — Workshop mods tagged `public`-only no longer spam unsupported-branch errors/UI on `public-beta`.
 - **Rest-site act fallback** — unknown act IDs no longer throw when showing rest-site character animations.
 
 ### Mod combat / API retargets
@@ -22,6 +23,7 @@ Keeps older mods working after STS2 CardPlay / Damage / Hook signature changes:
 - Boss Mechanics Plus
 - Wanderer
 - Cultist Simulator Relic
+- YukiMod
 - The Unknown
 - Reimu Hakurei
 - Kakarot
@@ -34,29 +36,43 @@ Keeps older mods working after STS2 CardPlay / Damage / Hook signature changes:
 - BloodMaze
 
 ### Targeted behavior fixes
-- **Sephiroth** — restores character select icon path; disables the global rest/merchant hide that blanked every character (including Classic Acts).
+- **Sephiroth** — restores character select icon path; disables the global rest/merchant hide that blanked every character (including Classic Acts); retargets `CreateDupe()` → `CreateDupe(Player)` and `LoseBlock` for STS2 v0.109.
+- **UncappedSpire** — removes obsolete `SavedPropertiesTypeCache.InjectTypeIntoCache` calls that hard-crash ModelDb init on STS2 v0.109.
+- **Boss Mechanics Plus / Illaoi** — removes obsolete `SavedPropertiesTypeCache` registration calls that fail during startup on STS2 v0.109.
+- **PengoTarot** — implements the v0.109 `PlayerChoiceContext` requirements and retargets its Wheel of Fortune damage call.
 - **Balls2** — DragonBall potion crash + combat-count guard; skips multiplayer-unsafe card-select UIs on DragonBall / Mercury / Mars / CrystalBall / BouncyBall / Marble.
-- **Cultist Simulator Relic** — Radiant Substance now applies **Radiance** (energy refund on play) instead of Illumination (draw trigger).
+- **Cultist Simulator Relic** — restores Radiant Substance's intended **Illumination** enchantment; fixes **Radiance** itself by running its energy refund through the enchanted card's direct `OnPlay` hook; retargets `CreateDupe()` → `CreateDupe(Player)` for Rebound Sun Book on STS2 v0.109.
+- **YukiMod** — retargets `CreateDupe()` → `CreateDupe(Player)` for card replay on STS2 v0.109.
+- **Marisa** — Spine `SetAnimation` / `AddAnimation` void-return retarget (same class as Boss Mechanics Plus).
 - **ZSMod-Reaper** — Reanimate icons register the missing MegaLabel theme font.
-- **Wylder** — SoulTree act map shrunk so RestSite unlocks the boss path.
+- **Wylder** — SoulTree act map shrunk so RestSite unlocks the boss path; ResultPile retarget uses v0.109 `GetResultLocationForCardPlay`.
 - **The Unknown** — stubs obsolete `WithCustomPool` so Codex pool calls don’t hang.
 
 ### Localization / PCK polish
-English display names / character-select text for Cultist, Reimu, WeaponMaster (GrandMaster at Arms), Yuki, LittleWizard, Wanderer, Tarnished, Saber, and Wylder Act 4 labels. Optional Wylder background replacement asset included.
+English display names / character-select text for Cultist, Reimu, WeaponMaster (GrandMaster at Arms), Yuki, LittleWizard, Wanderer, Tarnished, Saber, and Wylder Act 4 labels. Wylder's Act 4 boss is consistently translated as **Equilibrious Beast**, including its encounter, monster, selector, and phase-change text. Optional Wylder background replacement asset included.
+
+### Restoring localization after a Steam update
+Steam Workshop updates and Steam's **Verify integrity of game files** can restore original game/mod files and overwrite TarnishedCompat's DLL or PCK localization patches. To restore them:
+1. In Steam, verify Slay the Spire 2's installed files and let Workshop downloads finish.
+2. Close Slay the Spire 2.
+3. Run `UpdatePatcher.bat` if sharing an older TarnishedCompat install.
+4. Run `PatchAll.bat` again.
+
+Do not run Steam verification after patching unless you intend to rerun the patcher afterward.
 
 ---
 
 ## Reasoning
 
-STS2’s mid-EA API churn (especially `CreatureCmd.Damage`, `CardSelectCmd.FromCard`, Hook damage modifiers, potion factory return types, and Spine animation void returns) left many otherwise-good Workshop mods calling methods that no longer exist or have different signatures. Those failures show up as silent no-ops, MissingMethod crashes, InvalidProgramException, softlocks on card select, or blank UI.
+STS2’s mid-EA API churn (especially `CreatureCmd.Damage`, `CardSelectCmd.FromCard`, Hook damage modifiers, potion factory return types, Spine animation void returns, and `CardModel.CreateDupe(Player)` on v0.109) left many otherwise-good Workshop mods calling methods that no longer exist or have different signatures. Those failures show up as silent no-ops, MissingMethod crashes, InvalidProgramException, softlocks on card select, or blank UI.
 
 TarnishedCompat does **not** replace the mods. It:
 1. Backs up originals where needed.
 2. Retargets call sites / Harmony signatures onto the current game APIs.
-3. Applies a few narrowly scoped behavior guards where the upstream mod path is known-broken in co-op or on unknown acts.
-4. Publishes a self-updating zip so users stay on the same patched set.
+3. Applies a few narrowly scoped behavior guards where the upstream mod path is known-broken in co-op or on unknown acts (including silencing Workshop `public`-only branch tags on `public-beta`, which only produce UI noise).
+4. Publishes a self-updating zip so friends stay on the same patched set.
 
-When a fix changes gameplay (example: Balls2 multiplayer card-select skips, Sephiroth rest/merchant unhide, Radiant → Radiance), it is intentional compatibility triage: prefer a working co-op/singleplayer experience over preserving a broken call path.
+When a fix changes gameplay (example: Balls2 multiplayer card-select skips or Sephiroth rest/merchant unhide), it is intentional compatibility triage: prefer a working co-op/singleplayer experience over preserving a broken call path. Existing mod behavior is otherwise preserved; Radiant Substance remains Illumination while the separate Radiance enchantment is repaired.
 
 Classic Acts Randomizer is **not** force-patched by default; use Act Toggler / manual `patch-classic-acts` if needed. BaseLib and RitsuLib are resolved as dependencies but not modified.
 
