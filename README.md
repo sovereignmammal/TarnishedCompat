@@ -52,6 +52,7 @@ Keeps older mods working after STS2 CardPlay / Damage / Hook signature changes:
 - **SpireHeart (Heart of the Spire)** — retargets `RunRngSet.get_Seed` from `UInt32` → `UInt64` (with truncate) so `BeforeCombatStart` no longer aborts combat setup with empty hand / 0 energy.
 - **The King's Decree** — retargets stale `RunRngSet.get_Seed` / `Rng(UInt32, Int32)` so entering map events no longer black-screens.
 - **Workshop seed/Rng sweep** — `patch-all` (and `patch-seed-apis`) scans every live Workshop DLL for stale `RunRngSet.get_Seed` (`UInt32`), `GetDeterministicHashCode` (`Int32`), and `Rng(UInt32, …)` call sites and retargets them to the v0.109 `UInt64` APIs. This also re-fixes mods Steam overwrites after a Workshop update.
+- **Workshop Steam lock** — after `patch-all` / `sweep-seed`, TarnishedCompat marks live Workshop DLLs and `appworkshop_2868840.acf` **read-only** so Steam cannot silently restore unpatched mods (especially SpireHeart). Use `unprotect-workshop` before intentionally updating Workshop items, then `PatchAll.bat` again.
 - **Balls2** — DragonBall potion crash + combat-count guard; skips multiplayer-unsafe card-select UIs on DragonBall / Mercury / Mars / CrystalBall / BouncyBall / Marble.
 - **Cultist Simulator Relic** — restores Radiant Substance's intended **Illumination** enchantment; fixes **Radiance** itself by running its energy refund through the enchanted card's direct `OnPlay` hook; retargets `CreateDupe()` → `CreateDupe(Player)` for Rebound Sun Book on STS2 v0.109.
 - **YukiMod** — retargets `CreateDupe()` → `CreateDupe(Player)` for card replay on STS2 v0.109.
@@ -69,7 +70,9 @@ Steam Workshop updates and Steam's **Verify integrity of game files** can restor
 1. In Steam, verify Slay the Spire 2's installed files and let Workshop downloads finish.
 2. Close Slay the Spire 2.
 3. Run `UpdatePatcher.bat` if sharing an older TarnishedCompat install.
-4. Run `PatchAll.bat` again.
+4. Run `PatchAll.bat` again (it re-applies patches and re-locks Workshop files).
+
+To intentionally pull Workshop mod updates: `UnprotectWorkshop.bat` → wait for Steam → `PatchAll.bat`.
 
 Do not run Steam verification after patching unless you intend to rerun the patcher afterward.
 
