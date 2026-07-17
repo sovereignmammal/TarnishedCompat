@@ -4,6 +4,14 @@ STS2 compatibility patcher with auto-updates.
 
 Friends: download the latest `TarnishedCompat-patcher.zip` from [Releases](https://github.com/sovereignmammal/TarnishedCompat/releases), extract, close the game, then run `PatchAll.bat`. Later updates: `UpdatePatcher.bat`.
 
+**Steam Workshop collection (subscribe here first):** [TarnishedCompat Mod Collection](https://steamcommunity.com/sharedfiles/filedetails/?id=3749444750)
+
+Recommended flow:
+1. Subscribe to the Workshop collection above and let Steam finish downloading.
+2. Close Slay the Spire 2.
+3. Run `PatchAll.bat`.
+4. If Steam verify / Workshop updates overwrite patches later, verify files, wait for downloads, then run `PatchAll.bat` again.
+
 ---
 
 ## Quick overview of fixes
