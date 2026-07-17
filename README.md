@@ -9,8 +9,8 @@ Friends: download the latest `TarnishedCompat-patcher.zip` from [Releases](https
 Recommended flow:
 1. Subscribe to the Workshop collection above and let Steam finish downloading.
 2. Close Slay the Spire 2.
-3. Run `PatchAll.bat`.
-4. If Steam verify / Workshop updates overwrite patches later, verify files, wait for downloads, then run `PatchAll.bat` again.
+3. Run `PatchAll.bat` (applies patches **and** locks Workshop files so Steam cannot overwrite them).
+4. Play. See **Stopping Steam from overwriting patches** below if you want Workshop author updates later.
 
 ---
 
@@ -52,7 +52,6 @@ Keeps older mods working after STS2 CardPlay / Damage / Hook signature changes:
 - **SpireHeart (Heart of the Spire)** — retargets `RunRngSet.get_Seed` from `UInt32` → `UInt64` (with truncate) so `BeforeCombatStart` no longer aborts combat setup with empty hand / 0 energy.
 - **The King's Decree** — retargets stale `RunRngSet.get_Seed` / `Rng(UInt32, Int32)` so entering map events no longer black-screens.
 - **Workshop seed/Rng sweep** — `patch-all` (and `patch-seed-apis`) scans every live Workshop DLL for stale `RunRngSet.get_Seed` (`UInt32`), `GetDeterministicHashCode` (`Int32`), and `Rng(UInt32, …)` call sites and retargets them to the v0.109 `UInt64` APIs. This also re-fixes mods Steam overwrites after a Workshop update.
-- **Workshop Steam lock** — after `patch-all` / `sweep-seed`, TarnishedCompat marks live Workshop DLLs and `appworkshop_2868840.acf` **read-only** so Steam cannot silently restore unpatched mods (especially SpireHeart). Use `unprotect-workshop` before intentionally updating Workshop items, then `PatchAll.bat` again.
 - **Balls2** — DragonBall potion crash + combat-count guard; skips multiplayer-unsafe card-select UIs on DragonBall / Mercury / Mars / CrystalBall / BouncyBall / Marble.
 - **Cultist Simulator Relic** — restores Radiant Substance's intended **Illumination** enchantment; fixes **Radiance** itself by running its energy refund through the enchanted card's direct `OnPlay` hook; retargets `CreateDupe()` → `CreateDupe(Player)` for Rebound Sun Book on STS2 v0.109.
 - **YukiMod** — retargets `CreateDupe()` → `CreateDupe(Player)` for card replay on STS2 v0.109.
@@ -65,14 +64,34 @@ Keeps older mods working after STS2 CardPlay / Damage / Hook signature changes:
 ### Localization / PCK polish
 English display names / character-select text for Cultist, Reimu, WeaponMaster (GrandMaster at Arms), Yuki, LittleWizard, Wanderer, Tarnished, Saber, and Hextech Runes, plus Wylder Act 4 labels. Hextech Runes' manifest name is translated so its relic attribution and WhatMod label no longer show `海克斯符文`. Wylder's Act 4 boss (**Equilibrious Beast**) gets full English for its name, choice cards, moves, summons, and fight buffs/debuffs — including Hatred tooltips that were hardcoded Chinese in the DLL. Optional Wylder background replacement asset included.
 
-### Restoring localization after a Steam update
-Steam Workshop updates and Steam's **Verify integrity of game files** can restore original game/mod files and overwrite TarnishedCompat's DLL or PCK localization patches. To restore them:
-1. In Steam, verify Slay the Spire 2's installed files and let Workshop downloads finish.
-2. Close Slay the Spire 2.
-3. Run `UpdatePatcher.bat` if sharing an older TarnishedCompat install.
-4. Run `PatchAll.bat` again (it re-applies patches and re-locks Workshop files).
+---
 
-To intentionally pull Workshop mod updates: `UnprotectWorkshop.bat` → wait for Steam → `PatchAll.bat`.
+## Stopping Steam from overwriting patches
+
+Steam Workshop can re-download mods (especially **SpireHeart**) and silently restore unpatched DLLs. TarnishedCompat blocks that after every `PatchAll` / `sweep-seed`.
+
+**What the lock does**
+- Marks live Workshop mod DLLs **read-only**
+- Marks `steamapps/workshop/appworkshop_2868840.acf` **read-only** so Steam cannot refresh Workshop state for STS2
+
+**Normal play:** just run `PatchAll.bat` once after subscribe/update — it patches and locks automatically.
+
+**When you want Workshop author updates again**
+1. Close Slay the Spire 2.
+2. Run `UnprotectWorkshop.bat` (or `TarnishedCompat.exe unprotect-workshop`).
+3. Let Steam finish Workshop downloads.
+4. Run `PatchAll.bat` again (re-applies patches and re-locks).
+
+Manual helpers in the release zip: `ProtectWorkshop.bat` / `UnprotectWorkshop.bat`.
+
+Steam may show a disk write error while the lock is on; that means the overwrite was blocked. Do not leave Workshop unlocked if you care about seed/API patches staying applied.
+
+### Restoring patches after Steam verify / Workshop updates
+If you already unlocked Workshop, verified game files, or otherwise let Steam restore originals:
+1. Let Steam finish any downloads.
+2. Close Slay the Spire 2.
+3. Run `UpdatePatcher.bat` if this is an older TarnishedCompat install.
+4. Run `PatchAll.bat` again (re-applies patches and re-locks Workshop files).
 
 Do not run Steam verification after patching unless you intend to rerun the patcher afterward.
 
