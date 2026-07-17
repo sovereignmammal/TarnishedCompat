@@ -55,7 +55,7 @@ Keeps older mods working after STS2 CardPlay / Damage / Hook signature changes:
 - **Balls2** — DragonBall potion crash + combat-count guard; skips multiplayer-unsafe card-select UIs on DragonBall / Mercury / Mars / CrystalBall / BouncyBall / Marble.
 - **Cultist Simulator Relic** — restores Radiant Substance's intended **Illumination** enchantment; fixes **Radiance** itself by running its energy refund through the enchanted card's direct `OnPlay` hook; retargets `CreateDupe()` → `CreateDupe(Player)` for Rebound Sun Book on STS2 v0.109.
 - **YukiMod** — retargets `CreateDupe()` → `CreateDupe(Player)` for card replay on STS2 v0.109.
-- **Marisa** — Spine `SetAnimation` / `AddAnimation` void-return retarget (same class as Boss Mechanics Plus).
+- **Marisa** — Spine `SetAnimation` / `AddAnimation` void-return retarget (same class as Boss Mechanics Plus); overrides `CustomRestSiteAnimPath` so The Ordinary Magician no longer falls back to Ironclad's rest-site skin.
 - **ZSMod-Reaper** — Reanimate icons register the missing MegaLabel theme font.
 - **Wylder** — SoulTree act map shrunk so RestSite unlocks the boss path; ResultPile retarget uses v0.109 `GetResultLocationForCardPlay`.
 - **The Unknown** — stubs obsolete `WithCustomPool` so Codex pool calls don’t hang.
