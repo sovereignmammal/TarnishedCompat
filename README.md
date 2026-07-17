@@ -68,13 +68,13 @@ English display names / character-select text for Cultist, Reimu, WeaponMaster (
 
 ## Stopping Steam from overwriting patches
 
-Steam Workshop can re-download mods (especially **SpireHeart**) and silently restore unpatched DLLs. TarnishedCompat blocks that after every `PatchAll` / `sweep-seed`.
+Steam Workshop can re-download mods (especially formerly **SpireHeart**) and silently restore unpatched DLLs. TarnishedCompat blocks that after every `PatchAll` / `sweep-seed`.
 
 **What the lock does**
 - Marks live Workshop mod DLLs **read-only**
 - Marks `steamapps/workshop/appworkshop_2868840.acf` **read-only** so Steam cannot refresh Workshop state for STS2
 
-**Normal play:** just run `PatchAll.bat` once after subscribe/update — it patches and locks automatically.
+**Normal play:** just run `PatchAll.bat` once after subscribe/update — it unlocks → patches → re-locks automatically.
 
 **When you want Workshop author updates again**
 1. Close Slay the Spire 2.
