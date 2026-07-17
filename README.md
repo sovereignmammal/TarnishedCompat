@@ -49,7 +49,7 @@ Keeps older mods working after STS2 CardPlay / Damage / Hook signature changes:
 - **The Unknown** — stubs obsolete `WithCustomPool` so Codex pool calls don’t hang.
 
 ### Localization / PCK polish
-English display names / character-select text for Cultist, Reimu, WeaponMaster (GrandMaster at Arms), Yuki, LittleWizard, Wanderer, Tarnished, Saber, and Wylder Act 4 labels. Wylder's Act 4 boss is consistently translated as **Equilibrious Beast**, including its encounter, monster, selector, and phase-change text. Optional Wylder background replacement asset included.
+English display names / character-select text for Cultist, Reimu, WeaponMaster (GrandMaster at Arms), Yuki, LittleWizard, Wanderer, Tarnished, Saber, and Wylder Act 4 labels. Wylder's Act 4 boss (**Equilibrious Beast**) gets full English for its name, choice cards, moves, summons, and fight buffs/debuffs — including Hatred tooltips that were hardcoded Chinese in the DLL. Optional Wylder background replacement asset included.
 
 ### Restoring localization after a Steam update
 Steam Workshop updates and Steam's **Verify integrity of game files** can restore original game/mod files and overwrite TarnishedCompat's DLL or PCK localization patches. To restore them:
