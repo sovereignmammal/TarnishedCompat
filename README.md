@@ -59,7 +59,8 @@ Keeps older mods working after STS2 CardPlay / Damage / Hook signature changes:
 - **Marisa** — Spine `SetAnimation` / `AddAnimation` void-return retarget (same class as Boss Mechanics Plus); overrides `CustomRestSiteAnimPath` so The Ordinary Magician no longer falls back to Ironclad's rest-site skin.
 - **ZSMod-Reaper** — Reanimate icons register the missing MegaLabel theme font.
 - **Wylder** — SoulTree act map shrunk so RestSite unlocks the boss path; ResultPile retarget uses v0.109 `GetResultLocationForCardPlay`.
-- **The Unknown** — retargets obsolete `WithCustomPool` to a public `WithCustomPoolCompat` that calls `WithCardPools` (Codex expands rewards correctly). Fixes Lost Coffer / end-of-combat / Continue hangs: repairs a broken `HashSet<CardPoolModel>.Add` MethodReference that threw `MissingMethodException` when The Codex built combat rewards.
+- **The Unknown** — full pass from `Unknown.original.dll`: retargets `AttackCommand.FromCard`, replaces obsolete `WithCustomPool` with a public `WithCustomPoolCompat` that builds distinct pool arrays (no List/HashSet MethodRefs) and calls `WithCardPools`. Fixes Codex / combat-end reward hangs from `MissingMethodException` on synthesized generic collection members.
+
 - **Hextech Runes (ARAM Mayhem)** — **Attack-Defense Unity** also matches modded basic Strike/Defend cards that omit Strike/Defend tags (e.g. The Unknown), so obtaining the rune actually pairs them into Iron Waves.
 
 ### Localization / PCK polish
