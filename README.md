@@ -60,6 +60,7 @@ Keeps older mods working after STS2 CardPlay / Damage / Hook signature changes:
 - **ZSMod-Reaper** — Reanimate icons register the missing MegaLabel theme font.
 - **Wylder** — SoulTree act map shrunk so RestSite unlocks the boss path; ResultPile retarget uses v0.109 `GetResultLocationForCardPlay`.
 - **The Unknown** — full pass from `Unknown.original.dll`: retargets `AttackCommand.FromCard`, replaces obsolete `WithCustomPool` with a public `WithCustomPoolCompat` that builds distinct pool arrays (no List/HashSet/Nullable MethodRefs) and calls `WithCardPools`. Fixes Codex / combat-end reward hangs from CoreCLR `MissingMethodException` on synthesized generic members. **Unravel** card-select is no longer cancelable (cancel was eating the Exhaust Power with no effect) and uses the remove-card prompt.
+- **Updater (v2026.07.17.2050)** — no longer trusts a single CDN. Checks GitHub raw + jsDelivr + GitHub Releases API and installs the newest version found (fixes false “Already up to date” when jsDelivr lagged on 2031).
 
 - **Hextech Runes (ARAM Mayhem)** — **Attack-Defense Unity** also matches modded basic Strike/Defend cards that omit Strike/Defend tags (e.g. The Unknown), so obtaining the rune actually pairs them into Iron Waves.
 
