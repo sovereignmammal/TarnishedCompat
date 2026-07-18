@@ -20,7 +20,7 @@ TarnishedCompat keeps a curated set of Workshop mods playable on current STS2 / 
 
 ### Game (`sts2.dll`)
 - **Tezcatara’s Ember** — enchanted cards (including modded ones) correctly become free.
-- **Large Capsule** — finds modded basic Strike/Defend cards that omit Strike/Defend tags (e.g. The Unknown); falls back to Ironclad basics instead of crashing Neow.
+- **Large Capsule** — finds modded basic Strike/Defend cards that omit Strike/Defend tags (e.g. The Unknown); falls back to Ironclad basics instead of crashing Neow. (v2026.07.17.2005 repairs a bad `FirstOrDefault` overload that ignored the filter and could grant the first pool card twice.)
 - **MegaLabel theme-font assert** — card library / compendium no longer hard-crashes on missing theme fonts.
 - **Steam branch-support noise** — Workshop mods tagged `public`-only no longer spam unsupported-branch errors/UI on `public-beta`.
 - **Rest-site act fallback** — unknown act IDs no longer throw when showing rest-site character animations.
