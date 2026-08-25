@@ -49,7 +49,7 @@ Keeps older mods working after STS2 CardPlay / Damage / Hook signature changes:
 - **UncappedSpire** — removes obsolete `SavedPropertiesTypeCache.InjectTypeIntoCache` calls that hard-crash ModelDb init on STS2 v0.109; also retargets chapter seed-change hash/`Rng` construction to the v0.109 `UInt64` APIs.
 - **Boss Mechanics Plus / Illaoi** — removes obsolete `SavedPropertiesTypeCache` registration calls that fail during startup on STS2 v0.109.
 - **PengoTarot** — implements the v0.109 `PlayerChoiceContext` requirements and retargets its Wheel of Fortune damage call.
-- **No Duplicate Characters** — retargets seed hashing / `Rng` construction to the v0.109 `UInt64` APIs so starting a run no longer hard-crashes.
+- **No Duplicate Characters / Wylder** — STS2 v0.111 replaced `LobbyPlayer` with `StartRunLobbyPlayer`. The checkmark on character select JIT-crashed (`StartRunLobby.get_Players()` missing) until those mods were retargeted. `patch-all` now sweeps Workshop DLLs for the old type.
 - **SpireHeart (Heart of the Spire)** — retargets `RunRngSet.get_Seed` from `UInt32` → `UInt64` (with truncate) so `BeforeCombatStart` no longer aborts combat setup with empty hand / 0 energy. Optional: if SpireHeart is unsubscribed, the patcher skips it instead of aborting.
 - **The King's Decree** — retargets stale `RunRngSet.get_Seed` / `Rng(UInt32, Int32)` so entering map events no longer black-screens.
 - **Workshop seed/Rng sweep** — `patch-all` (and `patch-seed-apis`) scans every live Workshop DLL for stale `RunRngSet.get_Seed` (`UInt32`), `GetDeterministicHashCode` (`Int32`), and `Rng(UInt32, …)` call sites and retargets them to the v0.109 `UInt64` APIs. This also re-fixes mods Steam overwrites after a Workshop update.
