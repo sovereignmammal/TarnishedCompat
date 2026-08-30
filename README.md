@@ -28,7 +28,7 @@ TarnishedCompat keeps a curated set of Workshop mods playable on current STS2 / 
 
 ### Mod combat / API retargets
 Keeps older mods working after STS2 CardPlay / Damage / Hook signature changes:
-- EldenRing (Tarnished2)
+- EldenRing (Tarnished2) — retargets stale combat/card APIs (Damage, AttackCommand, ResultPile, `CardCmd.Exhaust` return type on v0.111). Fixes cards like **Flame, Grant Me Strength** hanging mid-play when exhaust logic throws.
 - Just Enough Potion
 - Boss Mechanics Plus
 - Wanderer
@@ -40,7 +40,7 @@ Keeps older mods working after STS2 CardPlay / Damage / Hook signature changes:
 - Illaoi
 - SGG Community Pack
 - Deadcells
-- **Saber** — optional in `patch-all`; skipped cleanly when unsubscribed (FGO mods removed).
+- Saber
 - Wylder
 - Marisa
 - BloodMaze
