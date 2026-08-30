@@ -24,6 +24,7 @@ TarnishedCompat keeps a curated set of Workshop mods playable on current STS2 / 
 - **MegaLabel theme-font assert** — card library / compendium no longer hard-crashes on missing theme fonts.
 - **Steam branch-support noise** — Workshop mods tagged `public`-only no longer spam unsupported-branch errors/UI on `public-beta`.
 - **Rest-site act fallback** — unknown act IDs no longer throw when showing rest-site character animations.
+- **Ancient entry heal** — opening an Ancient no longer routes through `CreatureCmd.Heal`, so RitsuLib/mod heal hooks cannot crash with “Tried to get Hand pile while out of combat” and soft-lock dialogue.
 
 ### Mod combat / API retargets
 Keeps older mods working after STS2 CardPlay / Damage / Hook signature changes:
