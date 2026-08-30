@@ -40,7 +40,7 @@ Keeps older mods working after STS2 CardPlay / Damage / Hook signature changes:
 - Illaoi
 - SGG Community Pack
 - Deadcells
-- Saber
+- **Saber** — optional in `patch-all`; skipped cleanly when unsubscribed (FGO mods removed).
 - Wylder
 - Marisa
 - BloodMaze
