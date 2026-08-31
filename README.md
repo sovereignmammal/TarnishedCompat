@@ -41,6 +41,8 @@ Keeps older mods working after STS2 CardPlay / Damage / Hook signature changes:
 - SGG Community Pack
 - Deadcells
 - Saber
+
+`patch-all` skips **Deadcells** and **Saber** when those Workshop folders are not installed (v2026.08.30.2108), so the patcher no longer aborts with `Missing Workshop mod`.
 - Wylder
 - Marisa
 - BloodMaze
