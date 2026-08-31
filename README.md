@@ -42,7 +42,7 @@ Keeps older mods working after STS2 CardPlay / Damage / Hook signature changes:
 - Deadcells
 - Saber
 
-`patch-all` skips Workshop mods that are not installed instead of aborting with `Missing Workshop mod` (v2026.08.30.2112). Applies to UncappedSpire, Deadcells, Saber, and every other mod in the patch list.
+`patch-all` patches only the mods you actually have installed. Missing Workshop folders are skipped instead of aborting (v2026.08.30.2115). Core `sts2.dll` fixes always run when the game install is found.
 - Wylder
 - Marisa
 - BloodMaze
